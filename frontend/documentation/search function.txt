@@ -1,0 +1,35 @@
+search function
+
+
+Header is parent that search icon
+
+Search is child
+
+When clicking on the search icon then Search data should show all indkoebsliste in drop down menu
+	When clicking on each list then it will show 
+
+Child has key events when 
+
+
+--------------------------------------------------------------------
+
+ER-Diagram: Exercise
+
+
+
+https://dwdmnotes.blogspot.com/p/2-tier-architecturecontd-two-parts1.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

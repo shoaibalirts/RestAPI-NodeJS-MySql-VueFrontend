@@ -1,0 +1,95 @@
+{
+  "products": [
+    {
+      "prodId": 1,
+      "prodName": "Oksekød",
+      "co2_per_kg": 27.0,
+      "prodAlternatives": [
+        {
+          "prodId": 11,
+          "prodName": "Kyllingebryst",
+          "co2_per_kg": 6.0
+        },
+        {
+          "prodId": 12,
+          "name": "Linser (tørrede)",
+          "co2_per_kg": 1.1
+        },
+        {
+          "prodId": 13,
+          "name": "Svinekød",
+          "co2_per_kg": 7.0
+        }
+      ]
+    },
+    {
+      "prodId": 2,
+      "prodName": "Smør",
+      "co2_per_kg": 12.0,
+      "prodAlternatives": [
+        {
+          "prodId": 14,
+          "name": "Margarine (plantebaseret)",
+          "co2_per_kg": 3.3
+        },
+        {
+          "prodId": 15,
+          "name": "Olivenolie",
+          "co2_per_kg": 5.0
+        }
+      ]
+    },
+    {
+      "prodId": 3,
+      "prodName": "Hvedebrød",
+      "co2_per_kg": 1.0
+    },
+    {
+      "prodId": 4,
+      "prodName": "Yoghurt naturel",
+      "co2_per_kg": 2.0
+    },
+    {
+      "prodId": 5,
+      "prodName": "Æg",
+      "co2_per_kg": 4.5
+    },
+    {
+      "prodId": 6,
+      "prodName": "Kartofler",
+      "co2_per_kg": 0.3
+    },
+    {
+      "prodId": 7,
+      "prodName": "Tomater",
+      "co2_per_kg": 1.4
+    },
+    {
+      "prodId": 8,
+      "prodName": "Ris",
+      "co2_per_kg": 4.0,
+      "alternatives": [
+        {
+          "prodId": 16,
+          "name": "Kartofler",
+          "co2_per_kg": 0.3
+        },
+        {
+          "prodId": 17,
+          "name": "Pasta",
+          "co2_per_kg": 1.0
+        }
+      ]
+    },
+    {
+      "prodId": 9,
+      "prodName": "Kyllingebryst",
+      "co2_per_kg": 6.0
+    },
+    {
+      "prodId": 10,
+      "prodName": "Gulerødder",
+      "co2_per_kg": 0.2
+    }
+  ]
+}
