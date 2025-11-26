@@ -1,5 +1,6 @@
 import connection from "../database.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 connection.connect();
 // @desc      Get all products
@@ -141,14 +142,21 @@ export const createUser = async (req, res) => {
 // @access    Private, meaning after login we have to send a token
 export const signin = async (req, res, next) => {
   try {
-    const prodData = req.body;
-    console.log(prodData);
-    const loginData = {
-      username: prodData.user_name,
-      password: prodData.user_password,
-      userRole: prodData.user_role_name,
-    };
-    console.log(loginData);
+    const userName = req.body.userName;
+    const userPassword = req.body.userPassword;
+
+    const isPasswordValid = await bcrypt.compare(
+      userPassword,
+      foundUser.userPassword
+    );
+
+    if (!isPasswordValid) {
+      return res.status(404).json("Incorrect password.");
+    }
+
+    const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET);
+
+    res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
