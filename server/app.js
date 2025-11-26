@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
+// import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
@@ -9,6 +10,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  signin,
 } from "../server/controllers/dinProdukter.js";
 import logger from "../server/middleware/logger.js";
 // Get current file's directory
@@ -38,9 +40,12 @@ if (process.env.NODE_ENV === "development") {
 
 // Body Parser, already available in express
 app.use(express.json());
+
 const port = process.env.PORT || 3000;
 const router = express.Router();
 router.route("/").get(getAllProducts).post(createProduct);
+router.route("/signin").post(signin);
+
 router
   .route("/:prodId")
   .get(getProduct)

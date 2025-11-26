@@ -91,3 +91,23 @@ export const deleteProduct = async (req, res, next) => {
     res.status(201).json({ success: true, msg: "Product has been deleted" });
   });
 };
+
+// @desc      Create signin
+// @route     POST /api/dinprodukter
+// @access    Private, meaning after login we have to send a token
+export const signin = async (req, res, next) => {
+  try {
+    const prodData = req.body;
+    console.log(prodData);
+    const loginData = {
+      username: prodData.user_name,
+      password: prodData.user_password,
+      userRole: prodData.user_role_name,
+    };
+    console.log(loginData);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  res.status(201).json({ success: true, msg: "user is created" });
+};
