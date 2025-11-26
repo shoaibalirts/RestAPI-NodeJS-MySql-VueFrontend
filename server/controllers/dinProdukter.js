@@ -97,14 +97,14 @@ export const deleteProduct = async (req, res, next) => {
 // create a user
 
 export const createUser = async (req, res) => {
-  if (!req.body.userName) {
+  if (!req.body.user_name) {
     res.status(400).send({
       message: "User name can not be empty.",
     });
     return;
   }
 
-  if (!req.body.userPassword) {
+  if (!req.body.user_password) {
     res.status(400).send({
       message: "Password can not be empty.",
     });
