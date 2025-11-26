@@ -116,24 +116,33 @@ export const createUser = async (req, res) => {
   // check if the user exists
   const getUserQuery = `SELECT * FROM user WHERE user_name = ?`;
 
-  connection.query(getUserQuery, userName, function (error, results) {
-    if (results) return res.status(400).send("User name is already taken.");
-  });
-
-  const hashedPassword = await bcrypt.hash(req.body.user_password, 15);
-
-  const user = [userName, hashedPassword, req.body.user_role_name];
-
-  const createUserQuery = `INSERT INTO user (user_name, user_password, user_role_name) VALUES (?, ?, ?)`;
-
-  connection.query(createUserQuery, user, function (error) {
+  connection.query(getUserQuery, userName, async function (error, results) {
     if (error) {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the user.",
+      return res.status(500).send({
+        message: "Database error while checking user.",
       });
     }
 
-    res.status(201).json({ success: true, msg: "User has been created" });
+    if (results.length > 0) {
+      return res.status(400).send("User name is already taken.");
+    }
+
+    const hashedPassword = await bcrypt.hash(req.body.user_password, 15);
+
+    const user = [userName, hashedPassword, req.body.user_role_name];
+
+    const createUserQuery = `INSERT INTO user (user_name, user_password, user_role_name) VALUES (?, ?, ?)`;
+
+    connection.query(createUserQuery, user, function (error) {
+      if (error) {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the user.",
+        });
+      }
+
+      res.status(201).json({ success: true, msg: "User has been created" });
+    });
   });
 };
 
