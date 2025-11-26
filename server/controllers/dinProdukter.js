@@ -1,6 +1,5 @@
 import connection from "../database.js";
 connection.connect();
-
 // @desc      Get all products
 // @route     Get /api/dinprodukter
 // @access    Public
