@@ -1,32 +1,22 @@
 <template>
-  <h1>Show all products</h1>
-  <!-- <v-skeleton-loader type="card" v-if="loading"></v-skeleton-loader>
-  <v-card class="mx-auto" v-else>
-    <v-card-title class="text-center bg-primary rounded-b-circle">Seneste 30 dage</v-card-title>
+  <!-- <v-skeleton-loader type="card" v-if="loading"></v-skeleton-loader> -->
+  <v-card class="mx-auto">
+    <v-card-title class="text-center bg-primary rounded-b-circle">Dine Produkter</v-card-title>
 
     <v-list class="pb-0">
-      <div v-for="(list, index) in recent30DaysList" :key="`recent-${index}`">
-        <list-item :listData="list" />
+      <div v-for="(product, index) in allProducts" :key="`recent-${index}`">
+        <the-product :productData="product" />
         <v-divider></v-divider>
       </div>
     </v-list>
-    <v-card-text v-else class="text-center text-medium-emphasis"
-      >Ingen lister i de sidste 30 dage.</v-card-text
-    >
-
-    <v-card-title class="text-center bg-primary rounded-b-circle">Sidste måned</v-card-title>
-
-    <v-list v-if="previousMonthList.length > 0" class="pb-0">
-      <div v-for="(list, index) in previousMonthList" :key="`prev-month-${index}`">
-        <list-item :listData="list" />
-        <v-divider></v-divider>
-      </div>
-    </v-list>
-  </v-card> -->
+  </v-card>
+  <v-card class="mx-auto"> <the-plus></the-plus> </v-card>
 </template>
 <script>
 import { getAllProducts } from "@/api.js";
-import { formatDateDMY } from "@/utility/dateFormatter";
+import TheProduct from "@/components/TheProduct.vue";
+import ThePlus from "@/components/UI/ThePlus.vue";
+// import { formatDateDMY } from "@/utility/dateFormatter";
 
 export default {
   data() {
@@ -36,6 +26,10 @@ export default {
       isDeletedPressed: false,
       isUpdatedPressed: false,
     };
+  },
+  components: {
+    TheProduct,
+    ThePlus,
   },
   async mounted() {
     try {

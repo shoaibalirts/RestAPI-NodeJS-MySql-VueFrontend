@@ -18,3 +18,21 @@ export function getAllProducts() {
       // always executed
     });
 }
+
+export function addProduct() {
+  return axios
+    .post(`${API}`)
+    .then((results) => {
+      console.log("Api call:");
+
+      console.log(results.data);
+      return results.data;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log("frontend API calling error: " + error);
+    })
+    .finally(function () {
+      // always executed
+    });
+}
