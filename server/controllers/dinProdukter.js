@@ -115,8 +115,8 @@ export const createUser = async (req, res) => {
   // check if the user exists
   const getUserQuery = `SELECT * FROM user WHERE user_name=${userName}`;
 
-  connection.query(getUserQuery, function () {
-    return res.status(400).send("User name is already taken.");
+  connection.query(getUserQuery, function (error, results) {
+    if (results) return res.status(400).send("User name is already taken.");
   });
 
   const hashedPassword = await bcrypt.hash(req.body.user_password, 15);
