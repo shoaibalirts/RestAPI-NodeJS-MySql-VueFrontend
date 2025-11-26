@@ -13,6 +13,7 @@ import {
   updateProduct,
   deleteProduct,
   signin,
+  createUser,
 } from "../server/controllers/dinProdukter.js";
 import logger from "../server/middleware/logger.js";
 // Get current file's directory
@@ -50,6 +51,7 @@ const router = express.Router();
 router.route("/").get(getAllProducts).post(createProduct);
 router.route("/createproduct").post(createProduct);
 router.route("/signin").post(signin);
+router.route("/signup").post(createUser);
 
 router
   .route("/:prodId")
