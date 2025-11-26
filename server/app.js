@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 
 // import cookieParser from "cookie-parser";
 import path from "path";
@@ -48,10 +50,33 @@ app.use(express.json());
 
 const port = process.env.PORT || 3000;
 const router = express.Router();
-router.route("/").get(getAllProducts).post(createProduct);
-router.route("/createproduct").post(createProduct);
 router.route("/signin").post(signin);
 router.route("/signup").post(createUser);
+
+// verify jwt token
+app.use(cookieParser());
+
+const authenticateToken = (req, res, next) => {
+  // exclude login and sign up routes from jwt validation
+
+  if (req.path.includes("sign-in") || req.path.includes("sign-up"))
+    return next();
+
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json("No token was provided.");
+
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    return res.status(401).json("Invalid token.");
+  }
+};
+
+app.use("/api/dinprodukter", authenticateToken);
+
+router.route("/").get(getAllProducts).post(createProduct);
+router.route("/createproduct").post(createProduct);
 
 router
   .route("/:prodId")
