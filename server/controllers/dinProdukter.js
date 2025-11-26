@@ -1,4 +1,6 @@
 import connection from "../database.js";
+import bcrypt from "bcrypt";
+
 connection.connect();
 // @desc      Get all products
 // @route     Get /api/dinprodukter
@@ -88,6 +90,49 @@ export const deleteProduct = async (req, res, next) => {
     }
 
     res.status(201).json({ success: true, msg: "Product has been deleted" });
+  });
+};
+
+// create a user
+
+export const createUser = async (req, res) => {
+  if (!req.body.userName) {
+    res.status(400).send({
+      message: "User name can not be empty.",
+    });
+    return;
+  }
+
+  if (!req.body.userPassword) {
+    res.status(400).send({
+      message: "Password can not be empty.",
+    });
+    return;
+  }
+
+  const userName = req.body.user_name;
+
+  // check if the user exists
+  const getUserQuery = `SELECT * FROM user WHERE user_name=${userName}`;
+
+  connection.query(getUserQuery, function () {
+    return res.status(400).send("User name is already taken.");
+  });
+
+  const hashedPassword = await bcrypt.hash(req.body.user_password, 15);
+
+  const user = [userName, hashedPassword, req.body.user_role_name];
+
+  const createUserQuery = `INSERT INTO user (user_name, user_password, user_role_name) VALUES (?, ?, ?)`;
+
+  connection.query(createUserQuery, user, function (error) {
+    if (error) {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the user.",
+      });
+    }
+
+    res.status(201).json({ success: true, msg: "User has been created" });
   });
 };
 
