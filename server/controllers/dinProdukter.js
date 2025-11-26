@@ -142,24 +142,36 @@ export const createUser = async (req, res) => {
 // @access    Private, meaning after login we have to send a token
 export const signin = async (req, res, next) => {
   try {
-    const userName = req.body.userName;
-    const userPassword = req.body.userPassword;
+    const userName = req.body.user_name;
+    const userPassword = req.body.user_password;
 
-    const isPasswordValid = await bcrypt.compare(
-      userPassword,
-      foundUser.userPassword
-    );
+    const getUserQuery = "SELECT * FROM user WHERE user_name = ?";
 
-    if (!isPasswordValid) {
-      return res.status(404).json("Incorrect password.");
-    }
+    connection.query(getUserQuery, userName, async function (error, results) {
+      if (error) return res.status(404).json("User not found.");
 
-    const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET);
+      if (results.length === 0) {
+        return res.status(404).send("User not found.");
+      }
 
-    res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+      const foundUser = results[0];
+
+      const isPasswordValid = await bcrypt.compare(
+        userPassword,
+        foundUser.user_password
+      );
+
+      if (!isPasswordValid) {
+        return res.status(404).json("Incorrect password.");
+      }
+
+      const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET);
+
+      res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+
+      return res.status(201).json({ success: true, msg: "user is signed in" });
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-
-  res.status(201).json({ success: true, msg: "user is created" });
 };
