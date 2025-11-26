@@ -4,12 +4,12 @@ import ListDetails from "@/views/ListDetails.vue";
 import HomePage from "@/views/HomePage.vue";
 import AddNewList from "@/views/AddNewList.vue";
 import AddProduct from "@/views/AddProduct.vue";
-import products from "@/views/products.vue";
-import product from "@/views/product.vue";
+import SqlProducts from "@/views/SqlProducts.vue";
+import SqlProduct from "@/views/SqlProduct.vue";
 import updateproduct from "@/views/updateproduct.vue";
 import deleteproduct from "@/views/deleteproduct.vue";
-import login from "@/views/login.vue";
-import register from "@/views/register.vue";
+import SqlLogin from "@/views/SqlLogin.vue";
+import SqlRegister from "@/views/SqlRegister.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -40,11 +40,11 @@ const router = createRouter({
 
     {
       path: "/products",
-      component: products,
+      component: SqlProducts,
     },
     {
       path: "/product",
-      component: product,
+      component: SqlProduct,
     },
     {
       path: "/updateproduct",
@@ -56,11 +56,11 @@ const router = createRouter({
     },
     {
       path: "/login",
-      component: login,
+      component: SqlLogin,
     },
     {
       path: "/register",
-      component: register,
+      component: SqlRegister,
     },
     {
       path: "/:pathMatch(.*)*",

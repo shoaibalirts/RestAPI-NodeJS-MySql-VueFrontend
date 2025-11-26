@@ -1,6 +1,8 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
+
 // import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -39,6 +41,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+app.use(cors());
 // Body Parser, already available in express
 app.use(express.json());
 
