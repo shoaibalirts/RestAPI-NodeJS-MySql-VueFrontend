@@ -114,9 +114,9 @@ export const createUser = async (req, res) => {
   const userName = req.body.user_name;
 
   // check if the user exists
-  const getUserQuery = `SELECT * FROM user WHERE user_name=${userName}`;
+  const getUserQuery = `SELECT * FROM user WHERE user_name = ?`;
 
-  connection.query(getUserQuery, function (error, results) {
+  connection.query(getUserQuery, userName, function (error, results) {
     if (results) return res.status(400).send("User name is already taken.");
   });
 
