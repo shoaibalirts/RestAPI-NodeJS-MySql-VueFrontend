@@ -6,7 +6,7 @@
     <v-card class="mx-auto" width="95%" max-width="600" elevation="4">
       <v-list class="pb-0">
         <div v-for="(product, index) in allProducts" :key="`recent-${index}`">
-          <the-product :productData="product" />
+          <the-product :productData="product" @product-deleted="fetchProducts" />
           <v-divider></v-divider>
         </div>
       </v-list>
@@ -27,6 +27,33 @@ export default {
     toolbarTitle: String,
   },
   methods: {
+    async fetchProducts() {
+      try {
+        const receivedProductsFromMySqlDatabase = await getAllProducts();
+        // const receivedProductsFromMySqlDatabase = await getAllProducts();
+        console.log("Array from Api call:");
+
+        console.log(receivedProductsFromMySqlDatabase);
+
+        this.allProducts = receivedProductsFromMySqlDatabase.map((item) => {
+          return {
+            prodId: item.prod_id,
+            prodName: item.prod_name,
+            prodCo2: item.prod_co2,
+            // prodCreatedDate: item.curr_date ? formatDateDMY(item.curr_date) : "No date available",
+          };
+        });
+        console.log("final producs array:");
+
+        console.log(this.allProducts);
+
+        // return;
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      } finally {
+        this.loading = false;
+      }
+    },
     handleClickBackBtn() {
       console.log("clicked");
 
@@ -46,32 +73,8 @@ export default {
     ThePlus,
     ToolBar,
   },
-  async mounted() {
-    try {
-      const receivedProductsFromMySqlDatabase = await getAllProducts();
-      // const receivedProductsFromMySqlDatabase = await getAllProducts();
-      console.log("Array from Api call:");
-
-      console.log(receivedProductsFromMySqlDatabase);
-
-      this.allProducts = receivedProductsFromMySqlDatabase.map((item) => {
-        return {
-          prodId: item.prod_id,
-          prodName: item.prod_name,
-          prodCo2: item.prod_co2,
-          // prodCreatedDate: item.curr_date ? formatDateDMY(item.curr_date) : "No date available",
-        };
-      });
-      console.log("final producs array:");
-
-      console.log(this.allProducts);
-
-      // return;
-    } catch (err) {
-      console.error("Error fetching products:", err);
-    } finally {
-      this.loading = false;
-    }
+  mounted() {
+    this.fetchProducts();
   },
 };
 </script>

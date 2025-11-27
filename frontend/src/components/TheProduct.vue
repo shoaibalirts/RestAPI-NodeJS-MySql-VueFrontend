@@ -8,7 +8,10 @@
     <v-list-item-subtitle class="mt-1"> Created d. 25/11/2025</v-list-item-subtitle>
 
     <template v-slot:append>
-      <UpdateDelete />
+      <UpdateDelete
+        :productData="productData"
+        @product-deleted="$emit('product-deleted', $event)"
+      />
     </template>
   </v-list-item>
 </template>
@@ -19,7 +22,12 @@
 import UpdateDelete from "./UI/UpdateDelete.vue";
 import { mdiCircleMedium } from "@mdi/js";
 export default {
-  props: ["productData"],
+  props: {
+    productData: {
+      type: Object,
+    },
+  },
+  emits: ["product-deleted"],
   data() {
     return {
       mdiCircleMedium,

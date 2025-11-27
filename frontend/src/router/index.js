@@ -7,7 +7,7 @@ import AddProduct from "@/views/AddProduct.vue";
 import SqlProducts from "@/views/SqlProducts.vue";
 import SqlProduct from "@/views/SqlProduct.vue";
 import updateproduct from "@/views/updateproduct.vue";
-import deleteproduct from "@/views/deleteproduct.vue";
+import DeleteProduct from "@/views/DeleteProduct.vue";
 import SqlLogin from "@/views/SqlLogin.vue";
 import SqlRegister from "@/views/SqlRegister.vue";
 const router = createRouter({
@@ -52,7 +52,7 @@ const router = createRouter({
     },
     {
       path: "/deleteproduct",
-      component: deleteproduct,
+      component: DeleteProduct,
     },
     {
       path: "/login",

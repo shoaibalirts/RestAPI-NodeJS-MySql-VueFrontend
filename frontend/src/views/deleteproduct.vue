@@ -1,3 +1,20 @@
 <template>
-  <h1>Remove Product</h1>
+  <v-app>
+    <tool-bar toolbarTitle="Fjern Produktet" />
+  </v-app>
 </template>
+<script>
+import ToolBar from "@/components/layout/ToolBar.vue";
+
+export default {
+  props: {
+    toolbarTitle: String,
+  },
+  components: {
+    ToolBar,
+  },
+  data() {
+    return {};
+  },
+};
+</script>

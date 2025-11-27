@@ -24,11 +24,11 @@ export default {
       // isUserLoggedin: true,
       // isUserRegistered: true,
       items: [
-        { title: "Add a product", to: "/addproduct" },
-        { title: "Read all products", to: "/products" },
-        { title: "Find a single product", to: "/product" },
-        { title: "Update Product", to: "/updateproduct" },
-        { title: "Remove Product", to: "/deleteproduct" },
+        // { title: "Add a product", to: "/addproduct" },
+        { title: "Produkter", to: "/products" },
+        // { title: "Find a single product", to: "/product" },
+        // { title: "Update Product", to: "/updateproduct" },
+        // { title: "Remove Product", to: "/deleteproduct" },
       ],
       userArr: [
         { title: "Login", to: "/login" },
