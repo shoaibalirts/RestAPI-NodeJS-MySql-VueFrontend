@@ -1,12 +1,16 @@
 <template>
-  <v-list-item class="rounded elevation-1">
-    <v-list-item class="font-weight-bold">{{ productData.prodName }}</v-list-item>
-    <v-list-item class="font-weight-bold">{{ productData.prodCo2 }}</v-list-item>
+  <v-list-item class="rounded elevation-1 my-3">
+    <v-list-item-title class="font-weight-bold">
+      {{ productData.prodName }}
+    </v-list-item-title>
 
-    <!-- <v-list-item>{{ productData.currDate }}</v-list-item> -->
+    <v-list-item-subtitle class="mt-1"> CO2: {{ productData.prodCo2 }} </v-list-item-subtitle>
+    <v-list-item-subtitle class="mt-1"> Created d. 25/11/2025</v-list-item-subtitle>
+
+    <template v-slot:append>
+      <UpdateDelete />
+    </template>
   </v-list-item>
-
-  <update-delete />
 </template>
 
 <script>
