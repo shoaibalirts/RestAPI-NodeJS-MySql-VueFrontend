@@ -1,4 +1,7 @@
 import connection from "../database.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 connection.connect();
 // @desc      Get all products
 // @route     Get /api/dinprodukter
@@ -93,22 +96,93 @@ export const deleteProduct = async (req, res, next) => {
   });
 };
 
+// create a user
+
+export const createUser = async (req, res) => {
+  if (!req.body.user_name) {
+    res.status(400).send({
+      message: "User name can not be empty.",
+    });
+    return;
+  }
+
+  if (!req.body.user_password) {
+    res.status(400).send({
+      message: "Password can not be empty.",
+    });
+    return;
+  }
+
+  const userName = req.body.user_name;
+
+  // check if the user exists
+  const getUserQuery = `SELECT * FROM user WHERE user_name = ?`;
+
+  connection.query(getUserQuery, userName, async function (error, results) {
+    if (error) {
+      return res.status(500).send({
+        message: "Database error while checking user.",
+      });
+    }
+
+    if (results.length > 0) {
+      return res.status(400).send("User name is already taken.");
+    }
+
+    const hashedPassword = await bcrypt.hash(req.body.user_password, 15);
+
+    const user = [userName, hashedPassword, req.body.user_role_name];
+
+    const createUserQuery = `INSERT INTO user (user_name, user_password, user_role_name) VALUES (?, ?, ?)`;
+
+    connection.query(createUserQuery, user, function (error) {
+      if (error) {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the user.",
+        });
+      }
+
+      res.status(201).json({ success: true, msg: "User has been created" });
+    });
+  });
+};
+
 // @desc      Create signin
 // @route     POST /api/dinprodukter
 // @access    Private, meaning after login we have to send a token
 export const signin = async (req, res, next) => {
   try {
-    const prodData = req.body;
-    console.log(prodData);
-    const loginData = {
-      username: prodData.user_name,
-      password: prodData.user_password,
-      userRole: prodData.user_role_name,
-    };
-    console.log(loginData);
+    const userName = req.body.user_name;
+    const userPassword = req.body.user_password;
+
+    const getUserQuery = "SELECT * FROM user WHERE user_name = ?";
+
+    connection.query(getUserQuery, userName, async function (error, results) {
+      if (error) return res.status(404).json("User not found.");
+
+      if (results.length === 0) {
+        return res.status(404).send("User not found.");
+      }
+
+      const foundUser = results[0];
+
+      const isPasswordValid = await bcrypt.compare(
+        userPassword,
+        foundUser.user_password
+      );
+
+      if (!isPasswordValid) {
+        return res.status(404).json("Incorrect password.");
+      }
+
+      const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET);
+
+      res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+
+      return res.status(201).json({ success: true, msg: "user is signed in" });
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-
-  res.status(201).json({ success: true, msg: "user is created" });
 };

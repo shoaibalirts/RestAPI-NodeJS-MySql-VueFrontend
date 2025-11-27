@@ -57,10 +57,18 @@ const router = createRouter({
     {
       path: "/login",
       component: SqlLogin,
+      meta: {
+        Desc: "Personale",
+        adminHeaderTitle: "Login",
+      },
     },
     {
       path: "/register",
       component: SqlRegister,
+      meta: {
+        Desc: "Indtast dig og",
+        adminHeaderTitle: "Register",
+      },
     },
     {
       path: "/:pathMatch(.*)*",
