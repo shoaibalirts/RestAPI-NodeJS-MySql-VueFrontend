@@ -9,7 +9,7 @@
 
   <v-list v-if="!isCookieData">
     <v-list-item v-for="(item, index) in items" :key="index" :to="item.to" router>
-      <v-list-item-title class="text-center bg-primary pa-4">
+      <v-list-item-title class="text-center bg-primary pa-2">
         {{ item.title }}
       </v-list-item-title>
     </v-list-item>
@@ -24,11 +24,11 @@ export default {
       // isUserLoggedin: true,
       // isUserRegistered: true,
       items: [
-        { title: "Add a product", to: "/addproduct" },
-        { title: "Read all products", to: "/products" },
+        // { title: "Add a product", to: "/addproduct" },
+        { title: "Produkter", to: "/products" },
         { title: "Find a single product", to: "/product" },
-        { title: "Update Product", to: "/updateproduct" },
-        { title: "Remove Product", to: "/deleteproduct" },
+        // { title: "Update Product", to: "/updateproduct" },
+        // { title: "Remove Product", to: "/deleteproduct" },
       ],
       userArr: [
         { title: "Login", to: "/login" },

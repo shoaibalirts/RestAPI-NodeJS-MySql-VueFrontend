@@ -1,7 +1,5 @@
 <template>
-  <the-search v-if="isSearch" @search-updated="handleSearch" />
-
-  <v-app-bar v-else :elevation="4">
+  <v-app-bar :elevation="4">
     <template v-slot:prepend>
       <v-menu location="bottom start">
         <template v-slot:activator="{ props }">
@@ -12,10 +10,10 @@
       </v-menu>
     </template>
 
-    <v-app-bar-title @click="reloadApp">Dine Indkøbslister</v-app-bar-title>
+    <v-app-bar-title>Dine Indkøbslister</v-app-bar-title>
 
     <template v-slot:append>
-      <v-btn @click="callSearchComponent">
+      <v-btn>
         <v-icon :icon="mdiMagnify"></v-icon>
       </v-btn>
       <v-btn>
@@ -26,7 +24,6 @@
 </template>
 
 <script>
-import TheSearch from "../TheSearch.vue";
 import TheMenu from "../UI/TheMenu.vue";
 import { mdiMagnify, mdiDotsVertical, mdiMenu } from "@mdi/js";
 export default {
@@ -35,22 +32,11 @@ export default {
       mdiMagnify,
       mdiDotsVertical,
       mdiMenu,
-      isSearch: false,
       isMenu: false,
     };
   },
   components: {
-    TheSearch,
     TheMenu,
-  },
-  methods: {
-    reloadApp() {
-      window.location.reload();
-    },
-    callSearchComponent() {
-      console.log("clicked");
-      this.isSearch = true;
-    },
   },
 };
 </script>
