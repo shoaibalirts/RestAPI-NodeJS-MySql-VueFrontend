@@ -19,9 +19,9 @@ export function getAllProducts() {
     });
 }
 
-export function addProduct() {
+export function addProduct(formData) {
   return axios
-    .post(`${API}`)
+    .post(`${API}`, formData)
     .then((results) => {
       console.log("Api call:");
 

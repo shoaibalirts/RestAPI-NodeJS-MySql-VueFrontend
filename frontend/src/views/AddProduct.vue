@@ -20,5 +20,24 @@ export default {
       prodCo2: "",
     };
   },
+  methods: {
+    async submitProduct() {
+      const formData = {
+        prod_name: this.prodName,
+        prod_co2: this.prodCo2,
+      };
+      try {
+        const addingFormDataToSqlProductTable = await addProduct(formData);
+        console.log("Response From Server: ");
+        console.log(addingFormDataToSqlProductTable);
+        this.prodName = "";
+        this.prodCo2 = "";
+      } catch (error) {
+        console.log("Form Submission failed: ", error);
+      } finally {
+        console.log("New Product has been inserted into MySql Product table successfully");
+      }
+    },
+  },
 };
 </script>
