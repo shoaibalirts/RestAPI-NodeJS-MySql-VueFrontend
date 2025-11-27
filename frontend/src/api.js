@@ -3,7 +3,7 @@ const API = "http://localhost:3000/api/dinprodukter";
 
 export function login(data) {
   return axios
-    .post(`${API}/signin`, data)
+    .post(`${API}/signin`, data, { withCredentials: true })
     .then((results) => {
       console.log("Api call:");
 
