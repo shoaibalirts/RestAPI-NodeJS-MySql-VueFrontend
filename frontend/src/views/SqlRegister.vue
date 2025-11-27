@@ -30,13 +30,13 @@ export default {
     };
   },
   methods: {
-    register() {
+    async register() {
       const data = {
-        userName: this.Username,
-        userPassword: this.UserPassword,
+        user_name: this.Username,
+        user_password: this.UserPassword,
       };
 
-      const signupUser = signup(data);
+      const signupUser = await signup(data);
       if (signupUser === 201) {
         alert(`Bruger ${this.Username} er oprettet, venligst login`);
         this.$router.push(`/login`);
