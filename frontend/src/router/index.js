@@ -50,10 +50,10 @@ const router = createRouter({
       path: "/updateproduct",
       component: updateproduct,
     },
-    {
-      path: "/deleteproduct",
-      component: DeleteProduct,
-    },
+    // {
+    //   path: "/deleteproduct",
+    //   component: DeleteProduct,
+    // },
     {
       path: "/login",
       component: SqlLogin,

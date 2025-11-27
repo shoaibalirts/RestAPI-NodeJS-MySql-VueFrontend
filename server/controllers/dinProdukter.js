@@ -18,7 +18,9 @@ export const getAllProducts = async (req, res, next) => {
 // @route     Get /api/dinprodukter/:prodId
 // @access    Public
 export const getProduct = async (req, res, next) => {
-  const prodId = req.params.prodId;
+  const prodId = req.params.prodId || req.query.id;
+  console.log("prodId in getProduct:");
+  console.log(prodId);
 
   let query =
     "SELECT prod_id, prod_name, prod_co2, curr_date FROM product WHERE prod_id=?";

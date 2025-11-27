@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex justify-space-around ga-4">
-    <v-btn :icon="mdiPencil" @click.stop="handleUpdate(productData.prodId)"></v-btn>
+    <v-btn :icon="mdiPencil" @click.stop="handleUpdate"></v-btn>
     <v-btn :icon="mdiDelete" class="bg-primary" @click.stop="handleDelete"></v-btn>
   </div>
 </template>
 
 <script>
 import { mdiPencil, mdiDelete } from "@mdi/js";
-import { deleteProduct } from "@/api.js";
+import { deleteProduct, updateProduct } from "@/api.js";
 export default {
   props: {
     productData: {
@@ -22,9 +22,24 @@ export default {
     };
   },
   methods: {
-    handleUpdate() {
+    async handleUpdate() {
       console.log("update function is executing");
       console.log(this.productData);
+      //       {
+      //     "prodId": 3,
+      //     "prodName": "Kylling",
+      //     "prodCo2": 8
+      // }
+
+      try {
+        this.$router.push({
+          path: "/updateproduct",
+          query: { id: this.productData.prodId },
+        });
+        // this.$emit("product-updated", this.productData.id);
+      } catch (error) {
+        console.error("Error delete the product:", error);
+      }
     },
     async handleDelete() {
       console.log("delete function is executing");

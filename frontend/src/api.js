@@ -37,6 +37,28 @@ export function addProduct(formData) {
     });
 }
 
+export function getProductById(id) {
+  return axios.get(`${API}/${id}`).then((results) => results.data);
+}
+
+export function updateProduct(formData) {
+  return axios
+    .put(`${API}/${formData.id}`, formData)
+    .then((results) => {
+      console.log("Api call for updating the product:");
+
+      console.log(results.data);
+      return results.data;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log("frontend API calling error: " + error);
+    })
+    .finally(function () {
+      // always executed
+    });
+}
+
 export function deleteProduct(prodId) {
   return axios
     .delete(`${API}/${prodId}`)
