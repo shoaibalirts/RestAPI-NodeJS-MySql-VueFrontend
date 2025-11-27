@@ -32,7 +32,6 @@ export default {
     return {
       Username: "",
       UserPassword: "",
-      UserRole: "admin",
       rules: [(v) => !!v || "Field is required"],
       RegisterText: "Register",
     };
@@ -42,10 +41,9 @@ export default {
       const data = {
         user_name: this.Username,
         user_password: this.UserPassword,
-        user_role_name: this.UserRole,
       };
       const loginUser = await login(data);
-      if (loginUser === 200) this.$router.push({ path: "/products" });
+      if (loginUser === 201) this.$router.push({ path: "/products" });
     },
   },
 };

@@ -26,6 +26,7 @@ export default {
     return {
       Username: "",
       UserPassword: "",
+      UserRole: "admin",
       rules: [(v) => !!v || "Field is required"],
     };
   },
@@ -34,6 +35,7 @@ export default {
       const data = {
         user_name: this.Username,
         user_password: this.UserPassword,
+        user_role_name: this.UserRole,
       };
 
       const signupUser = await signup(data);
