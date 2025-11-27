@@ -16,6 +16,21 @@ export function login(data) {
     });
 }
 
+export function signup(data) {
+  return axios
+    .post(`${API}/signup`, data)
+    .then((results) => {
+      console.log("Api call:");
+
+      console.log(results.status);
+
+      return results.status;
+    })
+    .catch(function (error) {
+      console.log("Error when signing in: " + error);
+    });
+}
+
 export function getAllProducts() {
   return axios
     .get(`${API}`)
