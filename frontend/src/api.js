@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 axios.defaults.withCredentials = true;
 const API = "http://localhost:3000/api/dinprodukter";
 
@@ -98,6 +99,7 @@ export function login(data) {
     .post(`${API}/signin`, data, { withCredentials: true })
     .then((results) => {
       console.log("Api call:");
+      Cookies.set("token", response.token);
 
       console.log(results.status);
 
