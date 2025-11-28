@@ -41,6 +41,7 @@ export default {
             prodName: item.prod_name,
             prodCo2: item.prod_co2,
             // prodCreatedDate: item.curr_date ? formatDateDMY(item.curr_date) : "No date available",
+            prodCreatedDate: item.curr_date,
           };
         });
         console.log("final producs array:");

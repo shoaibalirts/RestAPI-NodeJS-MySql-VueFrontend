@@ -5,7 +5,9 @@
     </v-list-item-title>
 
     <v-list-item-subtitle class="mt-1"> CO2: {{ productData.prodCo2 }} </v-list-item-subtitle>
-    <v-list-item-subtitle class="mt-1"> Created d. 25/11/2025</v-list-item-subtitle>
+    <v-list-item-subtitle class="mt-1">
+      Created d. {{ SqlDateFormatter(productData.prodCreatedDate) }}</v-list-item-subtitle
+    >
 
     <template v-slot:append>
       <UpdateDelete
@@ -32,6 +34,19 @@ export default {
     return {
       mdiCircleMedium,
     };
+  },
+  methods: {
+    SqlDateFormatter(sqlDate) {
+      if (!sqlDate) return "";
+
+      const date = new Date(sqlDate);
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+    },
   },
   setup() {
     return {
