@@ -1,20 +1,6 @@
 import axios from "axios";
+axios.defaults.withCredentials = true;
 const API = "http://localhost:3000/api/dinprodukter";
-
-export function login(data) {
-  return axios
-    .post(`${API}/signin`, data)
-    .then((results) => {
-      console.log("Api call:");
-
-      console.log(results.status);
-
-      return results.status;
-    })
-    .catch(function (error) {
-      console.log("Error when logging in: " + error);
-    });
-}
 
 export function signup(data) {
   return axios
