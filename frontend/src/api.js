@@ -5,9 +5,9 @@ export function getAllProducts() {
   return axios
     .get(`${API}`)
     .then((results) => {
-      console.log("Api call for getting or reading all products:");
+      // console.log("Api call for getting or reading all products:");
 
-      console.log(results.data);
+      // console.log(results.data);
       return results.data;
     })
     .catch(function (error) {
@@ -63,9 +63,9 @@ export function deleteProduct(prodId) {
   return axios
     .delete(`${API}/${prodId}`)
     .then((results) => {
-      console.log("Api call for deleting a product:");
+      // console.log("Api call for deleting a product:");
 
-      console.log(results.data);
+      // console.log(results.data);
       return results.data;
     })
     .catch(function (error) {

@@ -25,8 +25,7 @@ export default {
   },
   methods: {
     handleClickBackBtn() {
-      console.log("clicked");
-
+      // console.log("clicked");
       this.$router.back();
     },
     handleClickHomePage() {

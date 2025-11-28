@@ -23,8 +23,8 @@ export default {
   },
   methods: {
     async handleUpdate() {
-      console.log("update function is executing");
-      console.log(this.productData);
+      // console.log("update function is executing");
+      // console.log(this.productData);
       //       {
       //     "prodId": 3,
       //     "prodName": "Kylling",
@@ -42,11 +42,11 @@ export default {
       }
     },
     async handleDelete() {
-      console.log("delete function is executing");
-      console.log(this.productData);
+      // console.log("delete function is executing");
+      // console.log(this.productData);
       try {
         const deletedProductInMySqlDatabase = await deleteProduct(this.productData.prodId);
-        console.log(deletedProductInMySqlDatabase);
+        // console.log(deletedProductInMySqlDatabase);
         this.$emit("product-deleted", this.productData.id);
       } catch (error) {
         console.error("Error delete the product:", error);
