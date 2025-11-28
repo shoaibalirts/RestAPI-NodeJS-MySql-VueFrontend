@@ -1,5 +1,5 @@
 <template>
-  <v-list v-if="!isLoggedIn">
+  <v-list v-if="!isCookieData">
     <v-list-item v-for="(item, index) in userArr" :key="index" :to="item.to" router>
       <v-list-item-title class="text-center bg-primary pa-4">
         {{ item.title }}
@@ -7,7 +7,7 @@
     </v-list-item>
   </v-list>
 
-  <v-list v-else>
+  <v-list v-if="isCookieData">
     <v-list-item v-for="(item, index) in items" :key="index" :to="item.to" router>
       <v-list-item-title class="text-center bg-primary pa-2">
         {{ item.title }}
@@ -17,11 +17,10 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
 export default {
   data() {
     return {
-      // isCookieData: false,
+      isCookieData: false,
       // isUserLoggedin: true,
       // isUserRegistered: true,
       items: [
@@ -36,13 +35,6 @@ export default {
         { title: "Register", to: "/register" },
       ],
     };
-  },
-  computed: {
-    isLoggedIn() {
-      // console.log(Cookies.get("token_debug"));
-
-      return !!Cookies.get("token_shoaib");
-    },
   },
 };
 </script>

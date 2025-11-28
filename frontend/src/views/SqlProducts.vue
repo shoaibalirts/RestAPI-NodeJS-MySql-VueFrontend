@@ -31,8 +31,8 @@ export default {
       try {
         const receivedProductsFromMySqlDatabase = await getAllProducts();
         // const receivedProductsFromMySqlDatabase = await getAllProducts();
-        console.log("Array from Api call:");
-        console.log(receivedProductsFromMySqlDatabase);
+        // console.log("Array from Api call:");
+        // console.log(receivedProductsFromMySqlDatabase);
 
         this.allProducts = receivedProductsFromMySqlDatabase.map((item) => {
           return {
