@@ -67,8 +67,8 @@ export default {
       try {
         // 2. Call your API to fetch the single product
         const product = await getProductById(productId);
-        console.log("product: ");
-        console.log(product);
+        // console.log("product: ");
+        // console.log(product);
 
         // 3. Populate the form fields with the fetched data
 

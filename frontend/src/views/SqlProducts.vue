@@ -31,21 +31,19 @@ export default {
       try {
         const receivedProductsFromMySqlDatabase = await getAllProducts();
         // const receivedProductsFromMySqlDatabase = await getAllProducts();
-        console.log("Array from Api call:");
-
-        console.log(receivedProductsFromMySqlDatabase);
+        // console.log("Array from Api call:");
+        // console.log(receivedProductsFromMySqlDatabase);
 
         this.allProducts = receivedProductsFromMySqlDatabase.map((item) => {
           return {
             prodId: item.prod_id,
             prodName: item.prod_name,
             prodCo2: item.prod_co2,
-            // prodCreatedDate: item.curr_date ? formatDateDMY(item.curr_date) : "No date available",
+            prodCreatedDate: item.curr_date,
           };
         });
-        console.log("final producs array:");
-
-        console.log(this.allProducts);
+        // console.log("final producs array:");
+        // console.log(this.allProducts);
 
         // return;
       } catch (err) {
