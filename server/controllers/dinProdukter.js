@@ -180,7 +180,9 @@ export const signin = async (req, res, next) => {
 
       res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
 
-      return res.status(201).json({ success: true, msg: "user is signed in" });
+      return res
+        .status(201)
+        .json({ success: true, msg: "user is signed in", token: token });
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });

@@ -20,7 +20,7 @@
 import LoginBtnForm from "@/components/UI/LoginBtnForm.vue";
 import { login } from "@/api";
 import AdminHeader from "../components/AdminHeader.vue";
-
+import Cookies from "js-cookie";
 export default {
   name: "LoginForm",
   components: {
@@ -43,7 +43,11 @@ export default {
         user_password: this.UserPassword,
       };
       const loginUser = await login(data);
-      if (loginUser === 201) this.$router.push({ path: "/products" });
+      if (loginUser === 201) {
+        // this.$router.push({ path: "/" });
+        this.$router.push("/");
+        window.location.reload();
+      }
     },
   },
 };
