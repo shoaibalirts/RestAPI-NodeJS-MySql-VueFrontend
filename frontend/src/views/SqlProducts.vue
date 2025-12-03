@@ -19,6 +19,18 @@ import { getAllProducts } from "@/api.js";
 import TheProduct from "@/components/TheProduct.vue";
 import ThePlus from "@/components/UI/ThePlus.vue";
 import ToolBar from "@/components/layout/ToolBar.vue";
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000");
+// console.log(socket);
+
+socket.on("connection", () => {
+  console.log("Conencted to Socket.IO server");
+});
+socket.on("messageFromServer", (message) => {
+  console.log("Message from Server: ", message.msg);
+  console.log("Socket id: ", message.id);
+});
+socket.emit("messageFromClient", { msg: "Hello from the client" });
 
 // import { formatDateDMY } from "@/utility/dateFormatter";
 
