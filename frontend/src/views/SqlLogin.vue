@@ -46,7 +46,7 @@ export default {
       if (loginUser === 201) {
         // this.$router.push({ path: "/" });
         this.$router.push("/");
-        window.location.reload();
+        // window.location.reload();
       }
     },
   },

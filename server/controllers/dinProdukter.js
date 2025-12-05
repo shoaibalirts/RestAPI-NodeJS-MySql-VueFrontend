@@ -9,14 +9,28 @@ connection.connect();
 export const getAllProducts = async (req, res, next) => {
   // reading all products from MySql product table
   let query = "SELECT prod_id, prod_name, prod_co2, curr_date FROM product";
+  // For firebase 'Products' table columns names are: prodId, prodName, co2_per_kg
   connection.query(query, function (error, results, fields) {
     if (error) {
       return res.status(500).json({ error: error.message });
     }
-    console.log("------------------------");
-    console.log("All Products from MySql product table");
-    console.log(results);
-    console.log("------------------------");
+    // console.log("------------------------");
+    // console.log("All Products from MySql product table");
+    // console.log(results);
+    // console.log("------------------------");
+    const fireStoreData = {};
+    for (const row of results) {
+      const documentId = String(row.prod_id);
+      const documentBody = {
+        prodName: row.prod_name,
+        co2_per_kg: row.prod_co2,
+        created_at: row.curr_date,
+      };
+      fireStoreData[documentId] = documentBody;
+    }
+    console.log("FireStoreData: ");
+    console.log(fireStoreData);
+
     res.json(results);
     // console.log(req.authenticationToken);
   });

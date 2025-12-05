@@ -25,6 +25,7 @@ export function getAllProducts() {
       // console.log("Api call for getting or reading all products:");
 
       // console.log(results.data);
+
       return results.data;
     })
     .catch(function (error) {
