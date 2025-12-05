@@ -7,11 +7,16 @@ connection.connect();
 // @route     Get /api/dinprodukter
 // @access    Public
 export const getAllProducts = async (req, res, next) => {
+  // reading all products from MySql product table
   let query = "SELECT prod_id, prod_name, prod_co2, curr_date FROM product";
   connection.query(query, function (error, results, fields) {
     if (error) {
       return res.status(500).json({ error: error.message });
     }
+    console.log("------------------------");
+    console.log("All Products from MySql product table");
+    console.log(results);
+    console.log("------------------------");
     res.json(results);
     // console.log(req.authenticationToken);
   });
@@ -148,7 +153,7 @@ export const createUser = async (req, res) => {
   });
 };
 
-// @desc      Create signin
+// @desc      Create signin controller
 // @route     POST /api/dinprodukter
 // @access    Private, meaning after login we have to send a token
 export const signin = async (req, res, next) => {
@@ -178,7 +183,16 @@ export const signin = async (req, res, next) => {
 
       const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET);
 
-      res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+      res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "lax", // allow cross-site
+        secure: false,
+      });
+      // res.cookie("token_debug", token, {
+      //   httpOnly: true,
+      //   sameSite: "none",
+      //   secure: false,
+      // });
 
       return res
         .status(201)

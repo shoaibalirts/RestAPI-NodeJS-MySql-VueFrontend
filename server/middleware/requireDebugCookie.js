@@ -1,3 +1,17 @@
+const requireDebugCookie = (req, res, next) => {
+  console.log("Cookies received:", req.cookies);
+
+  if (!req.cookies.token_debug) {
+    return res.status(403).json({
+      success: false,
+      msg: "Access denied. cookie token_debug not found.",
+    });
+  }
+
+  next(); // cookie exists → allow route
+};
+export default requireDebugCookie;
+/*
 // @desc    Lohs request to console
 const logger = (req, res, next) => {
   // req.authenticationToken =
@@ -10,3 +24,4 @@ const logger = (req, res, next) => {
   next();
 };
 export default logger;
+*/
